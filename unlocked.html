@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danke, Mama – für alles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            height: auto;
+            min-height: 100vh;
+            overflow-y: auto; /* SCROLLEN ERLAUBT */
+            -webkit-overflow-scrolling: touch;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ff9a9e, #fad0c4);
+            background-size: 400% 400%;
+            animation: bgShift 25s ease infinite;
+            color: #fff;
+            padding: 20px 15px;
+        }
+        @keyframes bgShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 30px auto;
+            padding: 50px 40px;
+            background: rgba(255, 255, 255, 0.22);
+            border-radius: 32px;
+            backdrop-filter: blur(18px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: rise 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            z-index: 10;
+        }
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #ffd700, #ff6b6b, #ff8ba7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 15px rgba(255,215,0,0.5)); }
+            to { filter: drop-shadow(0 0 30px rgba(255,182,193,0.8)); }
+        }
+
+        .heart {
+            font-size: 3.5rem;
+            text-align: center;
+            margin: 20px 0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .message {
+            font-size: 1.3rem;
+            line-height: 2;
+            margin: 28px 0;
+            text-align: center;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .highlight {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: #ffd700;
+            margin: 30px 0;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(255,215,0,0.6);
+        }
+
+        .codes {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 35px 0;
+            flex-wrap: wrap;
+        }
+        .code {
+            background: rgba(255,255,255,0.9);
+            color: #333;
+            padding: 14px 22px;
+            border-radius: 16px;
+            font-weight: bold;
+            font-size: 1.3rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.4rem;
+            margin: 50px 0 20px;
+            text-align: center;
+            color: #ff6b9d;
+            text-shadow: 0 0 15px rgba(255,107,157,0.5);
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 1rem;
+            opacity: 0.8;
+            font-style: italic;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px dashed rgba(255,255,255,0.3);
+        }
+
+        /* Glitzer-Cursor */
+        .sparkle {
+            position: absolute;
+            width: 6px; height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkle 1.5s linear forwards;
+            opacity: 0;
+        }
+        @keyframes sparkle {
+            0% { transform: scale(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Danke, Mama</h1>
+
+        <p class="message">
+            Du hast alle Rätsel gelöst, die Codes gefunden, sortiert und den Schatz entdeckt...<br>
+            Aber das war nur ein kleiner Weg, um dir zu sagen:
+        </p>
+
+        <p class="highlight">
+            Danke für <em>alles</em>, was du in meinem Leben getan hast.
+        </p>
+
+        <p class="message">
+            Danke, dass du mich <strong>getragen</strong> hast – im Bauch und im Herzen.<br>
+            Danke, dass du <strong>aufgestanden</strong> bist, wenn ich weinte – nachts, früh, immer.<br>
+            Danke, dass du <strong>gelacht</strong> hast, wenn ich dumm war – und mich nie ausgelacht hast.<br>
+            Danke, dass du <strong>geglaubt</strong> hast, auch wenn ich es nicht tat.<br><br>
+
+            Danke für die <strong>Umarmungen</strong>, die alles heilen.<br>
+            Danke für die <strong>Worte</strong>, die mich stark machen.<br>
+            Danke für die <strong>Stille</strong>, wenn ich sie brauchte.<br><br>
+
+            Du hast mir nicht nur das Leben geschenkt –<br>
+            du hast es <strong>gelebt</strong>, mit mir, für mich, durch mich.
+        </p>
+
+        <p class="highlight">
+            Du bist nicht nur meine Mama.<br>
+            Du bist mein <em>Zuhause</em>.
+        </p>
+
+        <div class="codes">
+            <div class="code">HZ49</div>
+            <div class="code">FS36</div>
+            <div class="code">LD13</div>
+            <div class="code">GT08</div>
+        </div>
+
+        <p class="message">
+            Diese Codes waren nur ein Spiel.<br>
+            Aber <strong>du</strong> bist das größte Geschenk.<br><br>
+            Ich liebe dich – <strong>immer, ewig, unendlich</strong>.
+        </p>
+
+        <div class="signature">
+            — Jayden
+        </div>
+
+        <p class="footer">
+            Made with all my love – forever and ever.
+        </p>
+    </div>
+
+    <script>
+        // Dauer-Konfetti (sanft)
+        setInterval(() => {
+            confetti({
+                particleCount: 4,
+                spread: 80,
+                origin: { y: 0.7 },
+                colors: ['#ff6b9d', '#ffc3a0', '#ffd700', '#ff8ba7']
+            });
+        }, 800);
+
+        // Glitzer beim Bewegen
+        document.addEventListener('mousemove', (e) => {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = (e.clientX - 3) + 'px';
+            sparkle.style.top = (e.clientY - 3) + 'px';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 1500);
+        });
+
+        // Herz pulsiert sanft
+        setInterval(() => {
+            const heart = document.querySelector('.heart');
+            heart.style.transform = 'scale(1.2)';
+            setTimeout(() => heart.style.transform = '', 300);
+        }, 3500);
+    </script>
+</body>
+</html>

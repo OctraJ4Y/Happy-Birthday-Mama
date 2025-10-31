@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sortiere die Codes!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb);
+            background-size: 400% 400%;
+            animation: bg 15s ease infinite;
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        @keyframes bg { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin: 20px 0;
+            background: linear-gradient(90deg, #fff, #e0f7fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .slots {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .slot {
+            height: 110px;
+            background: rgba(255,255,255,0.15);
+            border: 3px dashed rgba(255,255,255,0.4);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            backdrop-filter: blur(8px);
+            transition: all 0.4s ease;
+            cursor: default;
+        }
+        .slot.filled {
+            border-style: solid;
+            cursor: pointer;
+        }
+        .slot.correct {
+            border-color: #4ade80;
+            background: rgba(74, 222, 128, 0.2);
+        }
+        .slot.wrong {
+            border-color: #f87171;
+            background: rgba(248, 113, 113, 0.2);
+            animation: shake 0.5s;
+        }
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        .card {
+            width: 100px; height: 100px;
+            background: rgba(255,255,255,0.95);
+            color: #333;
+            font-weight: bold;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 10;
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+        .card.placed {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .cards-pool {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            min-height: 140px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 300px;
+            transition: 0.4s;
+        }
+        button:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(102,126,234,0.4); }
+        button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+            min-height: 30px;
+            font-size: 1.1rem;
+        }
+
+        .hint {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Sortiere absteigend!</h1>
+        <p>Klicke auf die Karten, um sie <strong>von oben nach unten</strong> zu ordnen:<br>
+        </p>
+
+        <div class="slots">
+            <div class="slot" data-pos="0">1. Platz</div>
+            <div class="slot" data-pos="1">2. Platz</div>
+            <div class="slot" data-pos="2">3. Platz</div>
+            <div class="slot" data-pos="3">4. Platz</div>
+        </div>
+
+        <div class="cards-pool" id="pool"></div>
+
+        <button id="checkBtn" onclick="checkOrder()" disabled>Überprüfen</button>
+        <div id="result"></div>
+        <div class="hint">Tipp: Falsch? Klicke auf den roten Slot – die Karte geht zurück!</div>
+    </div>
+
+    <script>
+        const codes = JSON.parse(localStorage.getItem('codes') || '[]');
+        const numberMap = { '49': 49, '36': 36, '13': 13, '08': 8 };
+        const correctOrder = ['49', '36', '13', '08'];
+        let placed = []; // [code1, code2, ...]
+        let cardElements = {}; // code → DOM-Element
+
+        const pool = document.getElementById('pool');
+        const slots = document.querySelectorAll('.slot');
+        const checkBtn = document.getElementById('checkBtn');
+
+        // Karten erstellen
+        const shuffled = [...codes].sort(() => Math.random() - 0.5);
+        shuffled.forEach(code => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.textContent = code;
+            card.dataset.code = code;
+            card.onclick = () => placeCard(code);
+            pool.appendChild(card);
+            cardElements[code] = card;
+        });
+
+        function placeCard(code) {
+            if (placed.includes(code)) return; // schon platziert
+
+            const nextIndex = placed.length;
+            if (nextIndex >= 4) return;
+
+            const slot = slots[nextIndex];
+            const isCorrect = code === correctOrder[nextIndex];
+
+            // Karte in Slot legen
+            placed.push(code);
+            slot.innerHTML = `<div class="card placed">${code}</div>`;
+            slot.classList.add('filled', isCorrect ? 'correct' : 'wrong');
+            slot.style.borderStyle = 'solid';
+
+            // Originalkarte ausblenden
+            cardElements[code].style.display = 'none';
+
+            // Slot klickbar machen (zum Zurücknehmen)
+            slot.onclick = () => removeCard(nextIndex, code);
+
+            // Button aktivieren, wenn voll
+            if (placed.length === 4) {
+                checkBtn.disabled = false;
+            }
+        }
+
+        function removeCard(index, code) {
+            const slot = slots[index];
+            if (!slot.classList.contains('filled')) return;
+
+            // Aus Array entfernen
+            placed.splice(index, 1);
+
+            // Slot zurücksetzen
+            slot.innerHTML = `${index + 1}. Platz`;
+            slot.className = 'slot'; // alle Klassen entfernen
+            slot.onclick = null;
+
+            // Karte zurück in Pool
+            cardElements[code].style.display = 'flex';
+
+            // Button deaktivieren, wenn nicht voll
+            if (placed.length < 4) {
+                checkBtn.disabled = true;
+            }
+
+            // Nachfolgende Slots neu rendern
+            placed.forEach((c, i) => {
+                const s = slots[i];
+                const correct = c === correctOrder[i];
+                s.innerHTML = `<div class="card placed">${c}</div>`;
+                s.className = 'slot filled ' + (correct ? 'correct' : 'wrong');
+                s.style.borderStyle = 'solid';
+                s.onclick = () => removeCard(i, c);
+            });
+
+            // Leere Slots nach unten
+            for (let i = placed.length; i < 4; i++) {
+                const s = slots[i];
+                s.innerHTML = `${i + 1}. Platz`;
+                s.className = 'slot';
+                s.onclick = null;
+            }
+        }
+
+        function checkOrder() {
+            if (JSON.stringify(placed) === JSON.stringify(correctOrder)) {
+                confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
+                document.getElementById('result').innerHTML = 'Perfekt sortiert! Weiter...';
+                setTimeout(() => window.location.href = 'unlocked.html', 2200);
+            } else {
+                document.getElementById('result').innerHTML = 'Noch nicht ganz richtig...';
+            }
+        }
+
+        // Falls keine Codes → zurück
+        if (codes.length === 0) {
+            alert('Bitte zuerst die Codes eingeben!');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

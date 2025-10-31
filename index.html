@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ein Geschenk für Mama – ab 17:00 Uhr</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ff9a9e, #fad0c4);
+            background-size: 400% 400%;
+            animation: bg 15s ease infinite;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-y: auto;
+            position: relative;
+        }
+        @keyframes bg { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+        .container {
+            background: rgba(255,255,255,0.2);
+            padding: 40px;
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #fff, #ffe4e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .locked {
+            background: rgba(0,0,0,0.6);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .timer {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+            text-shadow: 0 0 20px rgba(255,0,0,0.5);
+            transition: color 0.5s ease;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            margin: 15px 0;
+            opacity: 0.9;
+        }
+
+        .notify-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 20px 0;
+            width: 100%;
+            transition: 0.4s;
+        }
+        .notify-btn:hover { transform: translateY(-4px); box-shadow: 0 15px 30px rgba(102,126,234,0.4); }
+        .notify-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        .input-group {
+            margin: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        input {
+            width: 100px;
+            padding: 12px;
+            text-align: center;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.9);
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+        input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: rgba(255,255,255,0.6);
+        }
+
+        button {
+            background: linear-gradient(135deg, #ff6b9d, #ffc3a0);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 25px;
+            width: 100%;
+            transition: 0.4s;
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        button.enabled {
+            opacity: 1;
+            cursor: pointer;
+        }
+        button.enabled:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255,107,167,0.4);
+        }
+
+        #result { margin-top: 15px; font-weight: bold; min-height: 30px; }
+
+        .heart {
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+            margin: 15px 0;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Ein Geschenk für Mama</h1>
+
+        <div id="lockedScreen" class="locked">
+            <p class="message">Die Überraschung startet erst <strong>um 17:00 Uhr</strong>!</p>
+            <div class="timer" id="timer">Lade...</div>
+            <p class="message">Komm dann wieder – ich hab dich lieb!</p>
+            <button class="notify-btn" id="notifyBtn">Benachrichtige mich!</button>
+            <p class="message" style="font-size:0.9rem; margin-top:10px;">(5 Min vorher + genau um 17:00 Uhr)</p>
+        </div>
+
+        <p>Schau in deinem Geschenk nach – <strong>4 Codes</strong> sind versteckt.<br>Trage sie hier ein – <strong>Reihenfolge egal</strong>!</p>
+
+        <div class="input-group">
+            <input type="text" id="c1" placeholder="Code 1" disabled>
+            <input type="text" id="c2" placeholder="Code 2" disabled>
+        </div>
+        <div class="input-group">
+            <input type="text" id="c3" placeholder="Code 3" disabled>
+            <input type="text" id="c4" placeholder="Code 4" disabled>
+        </div>
+
+        <button id="nextBtn" disabled>Weiter zur Sortierung</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // === ZEIT ===
+        const targetTime = new Date();
+        targetTime.setHours(17, 0, 0, 0); // 17:00 Uhr heute
+        const fiveMinBefore = new Date(targetTime.getTime() - 5 * 60 * 1000);
+
+        const timerEl = document.getElementById('timer');
+        const lockedScreen = document.getElementById('lockedScreen');
+        const inputs = document.querySelectorAll('input');
+        const nextBtn = document.getElementById('nextBtn');
+        const notifyBtn = document.getElementById('notifyBtn');
+        const result = document.getElementById('result');
+
+        const valid = new Set(['LD13', 'HZ49', 'FS36', 'GT08'].map(c => c.toUpperCase()));
+        let entered = new Set();
+        let notificationScheduled = false;
+        let sent5Min = false;
+        let sentUnlock = false;
+
+        // === NOTIFICATION API (lokal, ohne Server) ===
+        async function requestNotificationPermission() {
+            if ('Notification' in window && Notification.permission === 'default') {
+                const permission = await Notification.requestPermission();
+                return permission === 'granted';
+            }
+            return Notification.permission === 'granted';
+        }
+
+        async function showNotification(title, body) {
+            if (!(await requestNotificationPermission())) return;
+
+            new Notification(title, {
+                body: body,
+                icon: 'https://via.placeholder.com/64/ff9a9e/ffffff?text=Heart',
+                tag: 'mama-gift',
+                renotify: true
+            }).onclick = () => window.focus();
+        }
+
+        // === TIMER & BENACHRICHTIGUNGEN ===
+        function updateTimer() {
+            const now = new Date();
+            const diff = targetTime - now;
+
+            // 5 Minuten vorher
+            if (!sent5Min && diff <= 5 * 60 * 1000 && diff > 0) {
+                showNotification('Noch 5 Minuten!', 'Deine Überraschung ist gleich da!');
+                sent5Min = true;
+            }
+
+            // Genau um 17:00 Uhr
+            if (!sentUnlock && diff <= 0) {
+                showNotification('Jetzt freigeschaltet!', 'Klick hier für deine Nachricht!');
+                sentUnlock = true;
+
+                // Freischalten
+                lockedScreen.style.display = 'none';
+                inputs.forEach(i => {
+                    i.disabled = false;
+                    i.oninput = checkInputs;
+                });
+                nextBtn.disabled = false;
+                nextBtn.classList.add('enabled');
+                nextBtn.onclick = goToOrder;
+                timerEl.textContent = 'Los geht’s!';
+                return;
+            }
+
+            // Timer anzeigen
+            if (diff > 0) {
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                timerEl.textContent = `${hours}h ${minutes}m ${seconds}s`;
+
+                // Farbe rot werden
+                const totalMinutes = diff / (1000 * 60);
+                if (totalMinutes < 5) {
+                    timerEl.style.color = '#ff3333';
+                } else if (totalMinutes < 15) {
+                    timerEl.style.color = '#ff6b6b';
+                } else {
+                    timerEl.style.color = '#fff';
+                }
+            }
+
+            requestAnimationFrame(updateTimer);
+        }
+
+        // === CODE-EINGABE ===
+        function checkInputs() {
+            entered.clear();
+            const vals = ['c1','c2','c3','c4'].map(id => document.getElementById(id).value.trim().toUpperCase().replace(/[^A-Z0-9]/g, ''));
+            vals.forEach(code => { if (code && valid.has(code)) entered.add(code); });
+
+            if (entered.size === 4) {
+                nextBtn.style.background = 'linear-gradient(135deg, #4ade80, #86efac)';
+                result.innerHTML = 'Perfekt! Alle Codes gefunden!';
+                localStorage.setItem('codes', JSON.stringify([...entered]));
+            } else {
+                nextBtn.style.background = '';
+                result.innerHTML = entered.size > 0 ? `${entered.size}/4 Codes richtig` : '';
+            }
+        }
+
+        function goToOrder() {
+            window.location.href = 'order.html';
+        }
+
+        // === INIT ===
+        updateTimer();
+
+        notifyBtn.onclick = async () => {
+            if (await requestNotificationPermission()) {
+                notifyBtn.textContent = 'Benachrichtigungen aktiviert!';
+                notifyBtn.disabled = true;
+                notificationScheduled = true;
+            } else {
+                alert('Benachrichtigungen abgelehnt – komm manuell um 17:00 Uhr!');
+            }
+        };
+    </script>
+</body>
+</html> 
