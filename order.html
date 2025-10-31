@@ -175,8 +175,8 @@
 
     <script>
         const codes = JSON.parse(localStorage.getItem('codes') || '[]');
-        const numberMap = { '49': 49, '36': 36, '13': 13, '08': 8 };
-        const correctOrder = ['49', '36', '13', '08'];
+        const numberMap = { 'HZ49': 49, 'FS36': 36, 'LD13': 13, 'GT08': 8 };
+        const correctOrder = ['HZ49', 'FS36', 'LD13', 'GT08'];
         let placed = []; // [code1, code2, ...]
         let cardElements = {}; // code → DOM-Element
 
