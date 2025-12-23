@@ -13,89 +13,29 @@
       --accent: #ffd369;
       --warm: #ffecd2;
     }
-
     * { box-sizing: border-box; font-family: "Segoe UI", system-ui, sans-serif; margin: 0; padding: 0; }
-
-    body {
-      min-height: 100vh;
-      background: var(--bg);
-      color: var(--text);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(255,255,255,0.05), rgba(0,0,0,0.65));
-      pointer-events: none;
-      z-index: 0;
-    }
-
+    body { min-height: 100vh; background: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; overflow-x: hidden; position: relative; }
+    body::after { content: ""; position: fixed; inset: 0; background: radial-gradient(circle at center, rgba(255,255,255,0.05), rgba(0,0,0,0.65)); pointer-events: none; z-index: 0; }
     .app { width: 95%; max-width: 1100px; padding: 2rem; position: relative; z-index: 1; }
-
-    .glass {
-      background: linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.12));
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
-      border-radius: 24px;
-      border: 1px solid var(--border);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
-      padding: 2.5rem;
-      animation: fadeIn 1.2s ease;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 0.5rem;
-      font-size: 2.6rem;
-      background: linear-gradient(90deg, #ffe29f, #ffa99f, #ffd369);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: glow 3s ease-in-out infinite;
-    }
-
+    .glass { background: linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.12)); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border-radius: 24px; border: 1px solid var(--border); box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55); padding: 2.5rem; animation: fadeIn 1.2s ease; }
+    h1 { text-align: center; margin-bottom: 0.5rem; font-size: 2.6rem; background: linear-gradient(90deg, #ffe29f, #ffa99f, #ffd369); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: glow 3s ease-in-out infinite; }
     .subtitle { text-align: center; opacity: 0.9; margin-bottom: 2rem; color: var(--warm); }
-
     .tabs { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-
     .tab-btn { padding: 0.7rem 1.5rem; border-radius: 999px; border: 1px solid var(--border); background: rgba(255,255,255,0.1); color: white; cursor: pointer; transition: all 0.3s ease; }
-
     .tab-btn.active, .tab-btn:hover { background: var(--accent); color: #000; }
-
     .tab-content { display: none; animation: slideUp 0.6s ease; }
-
     .tab-content.active { display: block; }
-
-    .intro { text-align: center; font-size: 1.1rem; line-height: 1.6; }
-
-    .reasons {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    .reason {
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
+    .intro { text-align: center; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1rem; }
+    .reasons { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .reason { background: rgba(255, 255, 255, 0.12); border: 1px solid var(--border); border-radius: 16px; padding: 1rem; transition: transform 0.3s ease, box-shadow 0.3s ease; }
     .reason:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); }
-
     .reason span { color: var(--accent); font-weight: bold; }
-
     footer { text-align: center; margin-top: 2.5rem; opacity: 0.7; font-size: 0.9rem; }
-
     .snowflake { position: fixed; top: -10px; color: white; opacity: 0.8; animation: snow linear infinite; pointer-events: none; z-index: 0; }
-
+    .countdown { text-align:center; font-size:1.2rem; margin-bottom:1rem; color: var(--accent); }
+    .button-group { text-align:center; margin-top:1.5rem; }
+    .text-button { padding:0.7rem 1.5rem; margin:0.3rem; border:none; border-radius:12px; cursor:pointer; background:var(--accent); color:#000; font-weight:bold; transition:all 0.3s ease; }
+    .text-button:hover { background:#ffe29f; }
     @keyframes snow { to { transform: translateY(110vh); } }
     @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
     @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -106,33 +46,42 @@
   <div id="snow-container"></div>
 
   <div class="app">
-    <div class="glass">
+    <div class="glass" id="giftContent">
       <h1>🎄 Die besten Eltern der Welt 🎄</h1>
       <div class="subtitle">100 Gründe, warum Mama & Papa einfach einzigartig sind</div>
+      
+      <div id="timerMessage" class="countdown"></div>
 
-      <div class="tabs">
+      <div class="tabs" id="tabs" style="display:none;">
         <button class="tab-btn active" data-tab="guest">Für Gäste</button>
         <button class="tab-btn" data-tab="guestbook">Gästeliste</button>
         <button class="tab-btn" data-tab="parents">Für Mama & Papa</button>
       </div>
 
-      <div id="guest" class="tab-content active">
-        <p class="intro">Willkommen! ❤️<br>Wenn du möchtest, kannst du deinen Namen eintragen und Teil dieses Geschenks werden.</p>
+      <div id="guest" class="tab-content active" style="display:none;">
+        <p class="intro">Vor euch stehen die besten Eltern dieser Welt… 💖<br>Wenn du möchtest, kannst du deinen Namen eintragen und Teil dieses Geschenks werden.</p>
         <div style="text-align:center; margin-top:1.5rem;">
           <input id="guestName" placeholder="Dein Name" style="padding:0.6rem 1rem;border-radius:12px;border:none;max-width:240px;" />
           <button id="addGuest" class="tab-btn" style="margin-left:0.5rem;">Hinzufügen</button>
         </div>
         <p style="text-align:center;opacity:0.7;margin-top:1rem;">Dein Name erscheint in der Gästeliste ❤️</p>
+        <div style="text-align:center;margin-top:1rem;">
+          <button id="notifyBtn" class="text-button">Benachrichtige mich um 20:00 Uhr</button>
+        </div>
       </div>
 
-      <div id="guestbook" class="tab-content">
+      <div id="guestbook" class="tab-content" style="display:none;">
         <p class="intro">🎁 Menschen, die dieses Geschenk besucht haben:</p>
         <ul id="guestList" style="margin-top:1.5rem; list-style:none; padding:0; text-align:center;"></ul>
       </div>
 
-      <div id="parents" class="tab-content">
+      <div id="parents" class="tab-content" style="display:none;">
         <p class="intro">Liebe Mama, lieber Papa,<br>diese Gründe kommen von Herzen. Danke für alles. ❤️</p>
         <div id="reasons" class="reasons"></div>
+        <div class="button-group">
+          <button class="text-button" onclick="alert('Mama, du bist die beste! ❤️')">Text für Mama</button>
+          <button class="text-button" onclick="alert('Papa, du bist der Beste! ❤️')">Text für Papa</button>
+        </div>
       </div>
 
       <footer>Mit ❤️ gemacht von Jayden · Weihnachten 2025</footer>
@@ -141,55 +90,107 @@
 
   <script>
     // -------------------
+    // Timer für 20:00 Uhr
+    // -------------------
+    const giftContent = document.getElementById('giftContent');
+    const tabs = document.getElementById('tabs');
+    const guestTab = document.getElementById('guest');
+    const guestbookTab = document.getElementById('guestbook');
+    const parentsTab = document.getElementById('parents');
+    const timerMessage = document.getElementById('timerMessage');
+
+    function checkTime(){
+      const now = new Date();
+      let openTime = new Date();
+      openTime.setHours(20,0,0,0);
+      if(now >= openTime){
+        timerMessage.style.display = 'none';
+        tabs.style.display = 'flex';
+        guestTab.style.display = 'block';
+        guestbookTab.style.display = 'none';
+        parentsTab.style.display = 'none';
+        return true;
+      } else {
+        const diff = openTime - now;
+        const hours = Math.floor(diff/1000/60/60);
+        const minutes = Math.floor(diff/1000/60) % 60;
+        const seconds = Math.floor(diff/1000) % 60;
+        timerMessage.textContent = `🎁 Das Geschenk kann erst um 20:00 Uhr geöffnet werden! Noch ${hours}h ${minutes}m ${seconds}s`;
+        return false;
+      }
+    }
+
+    checkTime();
+    const timerInterval = setInterval(() => {
+      if(checkTime()){
+        clearInterval(timerInterval);
+      }
+    },1000);
+
+    // Notification
+    document.getElementById('notifyBtn').addEventListener('click', ()=>{
+      if("Notification" in window){
+        Notification.requestPermission().then(permission=>{
+          if(permission==="granted"){
+            const now = new Date();
+            let openTime = new Date();
+            openTime.setHours(20,0,0,0);
+            const delay = openTime - now;
+            if(delay>0){
+              setTimeout(()=> new Notification("🎁 Das Geschenk kann jetzt geöffnet werden!"), delay);
+              alert("Du wirst um 20:00 Uhr benachrichtigt!");
+            }
+          }
+        });
+      } else {
+        alert("Dein Browser unterstützt keine Benachrichtigungen!");
+      }
+    });
+
+    // -------------------
     // Gästeliste als JSON + LocalStorage
     // -------------------
     let guestData = { guests: [] };
-
     if(localStorage.getItem('guestData')){
       guestData = JSON.parse(localStorage.getItem('guestData'));
     }
 
     const guestList = document.getElementById('guestList');
-
     function renderGuests(){
       guestList.innerHTML = '';
-      guestData.guests.forEach((name) => {
+      guestData.guests.forEach((name)=>{
         const li = document.createElement('li');
         li.textContent = '❄️ ' + name;
         li.style.margin = '0.4rem 0';
         li.style.opacity = '0';
         li.style.transition = 'opacity 0.6s ease';
         guestList.appendChild(li);
-        requestAnimationFrame(() => li.style.opacity = '1');
+        requestAnimationFrame(()=>li.style.opacity='1');
       });
     }
-
     renderGuests();
 
     const guestInput = document.getElementById('guestName');
-    document.getElementById('addGuest').addEventListener('click', () => {
+    document.getElementById('addGuest').addEventListener('click',()=>{
       const name = guestInput.value.trim();
       if(!name) return;
-
       guestData.guests.push(name);
       localStorage.setItem('guestData', JSON.stringify(guestData));
       renderGuests();
-      guestInput.value = '';
-
-      // automatisch zur Gästeliste wechseln
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      guestInput.value='';
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
       document.querySelector('[data-tab="guestbook"]').classList.add('active');
-      document.getElementById('guestbook').classList.add('active');
+      guestbookTab.classList.add('active');
     });
 
     // -------------------
     // Tabs
     // -------------------
-    document.querySelectorAll('.tab-btn[data-tab]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn[data-tab]').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
         btn.classList.add('active');
         document.getElementById(btn.dataset.tab).classList.add('active');
       });
@@ -199,20 +200,20 @@
     // Snowflakes
     // -------------------
     const snowContainer = document.getElementById('snow-container');
-    for (let i = 0; i < 40; i++) {
-      const snow = document.createElement('div');
-      snow.className = 'snowflake';
-      snow.textContent = '❄';
-      snow.style.left = Math.random() * 100 + 'vw';
-      snow.style.fontSize = 12 + Math.random() * 18 + 'px';
-      snow.style.animationDuration = 6 + Math.random() * 6 + 's';
+    for(let i=0;i<40;i++){
+      const snow=document.createElement('div');
+      snow.className='snowflake';
+      snow.textContent='❄';
+      snow.style.left=Math.random()*100+'vw';
+      snow.style.fontSize=12+Math.random()*18+'px';
+      snow.style.animationDuration=6+Math.random()*6+'s';
       snowContainer.appendChild(snow);
     }
 
     // -------------------
     // 100 Gründe
     // -------------------
-    const reasons = [
+    const reasons=[
       "Ihr liebt mich bedingungslos",
       "Ihr wart immer für mich da",
       "Ihr habt mir Werte beigebracht",
@@ -233,16 +234,17 @@
       "Ihr habt mich ernst genommen",
       "Ihr habt mir Vertrauen geschenkt",
       "Ihr habt mich akzeptiert wie ich bin"
-      // ... weitere 80 Gründe ergänzen
+      // ...weitere 80 Gründe ergänzen
     ];
 
-    const reasonsContainer = document.getElementById('reasons');
-    reasons.forEach((text, i) => {
-      const div = document.createElement('div');
-      div.className = 'reason';
-      div.innerHTML = `<span>${i + 1}.</span> ${text}.`;
+    const reasonsContainer=document.getElementById('reasons');
+    reasons.forEach((text,i)=>{
+      const div=document.createElement('div');
+      div.className='reason';
+      div.innerHTML=`<span>${i+1}.</span> ${text}.`;
       reasonsContainer.appendChild(div);
     });
+
   </script>
 </body>
 </html>
