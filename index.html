@@ -1,14 +1,10 @@
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>🎄 Die besten Eltern der Welt 🎄</title>
+
 <style>
 :root {
   --bg1:#020617;
@@ -17,59 +13,107 @@
   --border: rgba(255,255,255,0.28);
   --text: #ffffff;
   --accent: #ffd369;
-  --ok: #3cff8f;
 }
 * { box-sizing:border-box; font-family:"Segoe UI",system-ui,sans-serif; }
-body { margin:0; min-height:100vh; color:var(--text); overflow-y:auto; display:flex; justify-content:center; align-items:flex-start; padding:2rem; background:linear-gradient(-45deg,var(--bg1),var(--bg2),#020617,#0b1c2d); background-size:400% 400%; animation:bgMove 18s ease infinite; }
-@keyframes bgMove { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-body::before { content:""; position:fixed; inset:0; background-image:radial-gradient(rgba(255,255,255,.15) 1px, transparent 1px); background-size:80px 80px; animation:particles 60s linear infinite; pointer-events:none; }
-@keyframes particles { from { transform:translateY(0); } to { transform:translateY(-800px); } }
-.glass { background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,.12)); backdrop-filter:blur(26px); border-radius:26px; border:1px solid var(--border); padding:2.6rem; max-width:1100px; width:95%; animation:enter .9s cubic-bezier(.2,.8,.2,1); position:relative; transition:all .5s ease; margin:auto; }
-@keyframes enter { from{opacity:0; transform:translateY(30px) scale(.96)} to{opacity:1; transform:none} }
-h1 { text-align:center; font-size:2.5rem; background:linear-gradient(90deg,#ffe29f,#ffd369,#ffa99f); -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:glow 3s ease-in-out infinite; }
-@keyframes glow { 0%,100%{filter:drop-shadow(0 0 6px rgba(255,211,105,.4))} 50%{filter:drop-shadow(0 0 18px rgba(255,211,105,.9))} }
-.tabs { display:flex; justify-content:center; gap:1rem; margin:2.2rem 0; flex-wrap:wrap; transition:all .5s ease; }
-.tab-btn { padding:.7rem 1.6rem; border-radius:999px; border:1px solid var(--border); background:rgba(255,255,255,.14); color:white; cursor:pointer; transition:all .35s ease, transform .35s ease; }
-.tab-btn.active { background:var(--accent); color:#000; box-shadow:0 8px 24px rgba(255,211,105,.5); }
-.tab-btn:hover { transform:translateY(-3px) scale(1.04); }
-.tab-content { display:none; opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease; }
-.tab-content.active { display:block; opacity:1; transform:translateY(0); }
-.intro { text-align:center; line-height:1.7; font-size:1.05rem; }
-.reasons { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; margin-top:2rem; }
-.reason { background:rgba(255,255,255,.12); border-radius:18px; padding:1.1rem; transition:all .4s ease; }
-.reason:hover { transform:translateY(-6px) scale(1.03); box-shadow:0 18px 40px rgba(0,0,0,.45); }
-footer { text-align:center; margin-top:2.5rem; opacity:.7; }
-.modal { position:fixed; inset:0; background:rgba(0,0,0,.75); display:flex; justify-content:center; align-items:center; z-index:100; }
-.modal.hidden { display:none; }
-.modal-content { background:var(--glass); backdrop-filter:blur(22px); padding:2.4rem; border-radius:26px; max-width:650px; width:90%; white-space:pre-line; }
-.code-inputs { display:flex; flex-direction:column; gap:1.2rem; align-items:center; margin:1.8rem 0; }
-.code-inputs input { width:100%; max-width:400px; text-align:center; padding:1.1rem; border-radius:18px; border:2px solid var(--border); background:rgba(255,255,255,.18); color:white; font-size:1.35rem; letter-spacing:.28em; text-transform:uppercase; transition:all .35s ease; }
-.code-inputs input:focus { transform:scale(1.05); outline:none; }
-.code-inputs input.correct { border-color:var(--ok); box-shadow:0 0 18px rgba(60,255,143,.75); }
-.blurred { filter:blur(9px); pointer-events:none; }
-textarea { width:100%; max-width:100%; padding:1rem; border-radius:16px; border:2px solid var(--border); background:rgba(255,255,255,.18); color:white; font-size:1rem; resize:vertical; margin-top:1rem; }
-button { padding:.7rem 1.4rem; border-radius:16px; border:none; background:var(--accent); cursor:pointer; transition:transform .3s ease, box-shadow .3s ease; }
-button:hover { transform:translateY(-3px) scale(1.05); box-shadow:0 12px 30px rgba(255,211,105,.6); }
+
+body {
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  padding:2rem;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  background:linear-gradient(-45deg,var(--bg1),var(--bg2),#020617,#0b1c2d);
+  background-size:400% 400%;
+  animation:bgMove 18s ease infinite;
+}
+
+@keyframes bgMove {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.glass {
+  background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,.12));
+  backdrop-filter:blur(26px);
+  border-radius:26px;
+  border:1px solid var(--border);
+  padding:2.6rem;
+  max-width:1100px;
+  width:95%;
+}
+
+h1 {
+  text-align:center;
+  font-size:2.5rem;
+  background:linear-gradient(90deg,#ffe29f,#ffd369,#ffa99f);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.tabs {
+  display:flex;
+  justify-content:center;
+  gap:1rem;
+  margin:2rem 0;
+  flex-wrap:wrap;
+}
+
+.tab-btn {
+  padding:.7rem 1.6rem;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.14);
+  color:white;
+  cursor:pointer;
+}
+
+.tab-btn.active {
+  background:var(--accent);
+  color:#000;
+}
+
+.tab-content { display:none; }
+.tab-content.active { display:block; }
+
+.intro { text-align:center; line-height:1.7; }
+
+.reasons {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1rem;
+  margin-top:2rem;
+}
+
+.reason {
+  background:rgba(255,255,255,.12);
+  border-radius:18px;
+  padding:1.1rem;
+}
+
+textarea {
+  width:100%;
+  padding:1rem;
+  border-radius:16px;
+  border:2px solid var(--border);
+  background:rgba(255,255,255,.18);
+  color:white;
+  margin-top:1rem;
+}
+
+footer {
+  text-align:center;
+  margin-top:2.5rem;
+  opacity:.7;
+}
 </style>
 </head>
+
 <body>
 
-<div id="codeModal" class="modal">
-  <div class="modal-content">
-    <h2>🔐 Vier Codes eingeben</h2>
-    <p class="intro">Bitte gib alle vier Codes ein, die du erhalten hast.</p>
-    <div class="code-inputs">
-      <input id="c1" maxlength="7" />
-      <input id="c2" maxlength="7" />
-      <input id="c3" maxlength="7" />
-      <input id="c4" maxlength="7" />
-    </div>
-    <div style="text-align:center;"><button id="unlockBtn">Freischalten</button></div>
-    <p id="codeError" style="color:#ff9a9a; text-align:center; margin-top:1rem;"></p>
-  </div>
-</div>
-
-<div class="glass blurred" id="app">
+<div class="glass">
   <h1>🎄 Die besten Eltern der Welt 🎄</h1>
 
   <div class="tabs">
@@ -80,241 +124,63 @@ button:hover { transform:translateY(-3px) scale(1.05); box-shadow:0 12px 30px rg
   </div>
 
   <div id="guest" class="tab-content active">
-    <p class="intro">Vor euch stehen die besten Eltern dieser Welt. Dieses Geschenk ist ein Einblick in all die Liebe, Dankbarkeit und Erinnerungen, die sie hinterlassen haben. ❤️</p>
-    <textarea id="guestReasons" placeholder="Hier kannst du deine eigenen Gründe eintragen..."></textarea>
+    <p class="intro">
+      Vor euch stehen die besten Eltern dieser Welt. ❤️
+    </p>
+    <textarea id="guestReasons" placeholder="Hier können Gäste eigene Gründe eintragen..."></textarea>
   </div>
 
   <div id="parents" class="tab-content">
     <div class="reasons" id="reasons"></div>
-    <div style="text-align:center; margin-top:2rem;">
-    </div>
   </div>
 
-  <div id="noah" class="tab-content blurred" data-unlocked="false"><p class="intro">        liebe mama und papa 
-        ich liebe euch sher und hoffe wir bleibe lange eine schöne familie
-        die zeit mit euch ist und wird immer die beste zeit sein 
-        auch wenn wir nicht immmer die beten und nettesten sind ist es immer eine tolle zeit mit euch
-        ich freue mich das wir so eine schöne familie geworden sind und uns alle lieb haben
-        dir mama will ich saen danke für das leckere essen das du immer für uns kochst das machst du immer mit liebe 
-        und es schmeckt immer super gut und du kümmerst dich auch immer um uns danke dafür
-        jetzt kommmen wir zum Papa
-        du papa bist net hast guten geschmak un machst immer richtig leckeres esse und bist der beste papa der Welt
-        ihr beide seid die besten eltern der welt ich hab euch lieb 
-        euer Noah
+  <div id="noah" class="tab-content">
+    <p class="intro">
+      liebe mama und papa  
+      ich liebe euch sehr und hoffe wir bleiben lange eine schöne familie  
+      ihr seid die besten eltern der welt ❤️  
+      euer Noah
+    </p>
+  </div>
 
-</p></div>
-
-  <div id="downloads" class="tab-content blurred">
-    <div style="text-align:center; margin-top:2rem;">
-      <button onclick="downloadFile('html')">HTML herunterladen</button>
-      <button onclick="downloadFile('pdf')">PDF herunterladen</button>
-      <button onclick="downloadFile('zip')">Alle Dateien herunterladen</button>
-    </div>
+  <div id="downloads" class="tab-content">
+    <p class="intro">Downloads können hier später ergänzt werden.</p>
   </div>
 
   <footer>Weihnachten 2025 · Mit ❤️ von Jayden</footer>
 </div>
 
-<div id="textModal" class="modal hidden">
-  <div class="modal-content">
-    <h2 id="modalTitle"></h2>
-    <div id="modalText"></div>
-    <div style="text-align:center; margin-top:1.2rem;"><button onclick="closeText()">Schließen</button></div>
-  </div>
-</div>
-
 <script>
-const VALID_CODES = ['K7M-42Q','X3A-N27','WQ6-91E','R9L-8FD'];
-const inputs = ['c1','c2','c3','c4'].map(id => document.getElementById(id));
-const app = document.getElementById('app');
-const codeModal = document.getElementById('codeModal');
-const codeError = document.getElementById('codeError');
-const unlockBtn = document.getElementById('unlockBtn');
-const noahTab = document.getElementById('noah');
-const NOAH_CODE = '31L13D';
+const tabButtons = document.querySelectorAll('.tab-btn');
+const contents = document.querySelectorAll('.tab-content');
 
-function formatInput(input){
-  let raw = input.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6);
-  const parts = raw.match(/.{1,3}/g);
-  input.value = parts ? parts.join('-') : '';
-}
-inputs.forEach(input => input.addEventListener('input', () => { formatInput(input); input.classList.remove('correct'); }));
-
-unlockBtn.addEventListener('click', () => {
-  const enteredCodes = inputs.map(i => i.value);
-  let allMatched = VALID_CODES.every(code => enteredCodes.includes(code));
-  if(allMatched){
-    inputs.forEach(i => i.classList.add('correct'));
-    codeModal.classList.add('hidden');
-    app.classList.remove('blurred');
-    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('blurred'));
-    codeError.textContent='';
-  } else {
-    codeError.textContent='❌ Mindestens ein Code ist falsch.';
-  }
+tabButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tabButtons.forEach(b => b.classList.remove('active'));
+    contents.forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
 });
 
-// Tabs + Noah-Code Schutz
-const tabButtons = document.querySelectorAll('.tab-btn');
-tabButtons.forEach(btn => btn.addEventListener('click', () => {
-  const target = btn.dataset.tab;
-  if(target==='noah' && noahTab.dataset.unlocked==='false'){ showNoahModal(); return; }
-  tabButtons.forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById(target).classList.add('active');
-}));
-
-function showNoahModal(){
-  if(document.getElementById('noahUnlockPopup')) return;
-  const popup = document.createElement('div');
-  popup.id='noahUnlockPopup';
-  popup.className='modal';
-  popup.innerHTML=`<div class="modal-content">
-    <h2>🔐 Code für Noah</h2>
-    <p class="intro">Bitte gib den Code ein, um diesen Tab zu entsperren.</p>
-    <input id="noahInput" maxlength="7" style="width:200px; text-align:center; padding:0.8rem; border-radius:12px; border:2px solid var(--border); text-transform:uppercase; font-size:1.2rem; display:block; margin:1rem auto;" />
-    <div style="text-align:center; margin-top:1.5rem;"><button id="noahUnlockBtn">Entsperren</button></div>
-    <p id="noahError" style="color:#ff9a9a; text-align:center; margin-top:1rem;"></p>
-  </div>`;
-  document.body.appendChild(popup);
-  document.getElementById('noahUnlockBtn').addEventListener('click', ()=>{
-    const val = document.getElementById('noahInput').value.toUpperCase();
-    if(val === NOAH_CODE){
-      noahTab.dataset.unlocked='true';
-      noahTab.classList.remove('blurred');
-      document.getElementById('downloads').classList.remove('blurred');
-      popup.remove();
-      document.querySelector('.tab-btn[data-tab="noah"]').click();
-    } else { document.getElementById('noahError').textContent='❌ Falscher Code!'; }
-  });
-}
-
-// Gründe einfügen – eigene 100 Gründe
-let reasonsArray = [
-  // Hier deine 100 individuellen Gründe eintragen, z.B.
-  "1. Ihr habt mir beigebracht, dass Träume keine Grenzen haben.",
-  "2. Ihr habt mich unterstützt, wenn ich mich unsicher gefühlt habe.",
-  "3. Ihr habt mir gezeigt, wie wichtig es ist, für andere da zu sein.",
-  "4. Ihr habt mich motiviert, immer mein Bestes zu geben.",
-  "5. Ihr habt mir geholfen, meine Ängste zu überwinden.",
-  "6. Ihr habt mir beigebracht, dass man sich selbst lieben sollte.",
-  "7. Ihr habt mich ermutigt, auf mein Herz zu hören.",
-  "8. Ihr habt mir gezeigt, dass Zusammenhalt stärker als alles andere ist.",
-  "9. Ihr habt mich unterstützt, als ich mich überfordert fühlte.",
-  "10. Ihr habt mir beigebracht, dass Geduld oft belohnt wird.",
-  "11. Ihr habt mich inspiriert, neugierig auf die Welt zu bleiben.",
-  "12. Ihr habt mir geholfen, Entscheidungen mutig zu treffen.",
-  "13. Ihr habt mir gezeigt, wie schön es ist, Erfolge zu feiern.",
-  "14. Ihr habt mich motiviert, Herausforderungen anzunehmen.",
-  "15. Ihr habt mir beigebracht, dass man immer an sich selbst glauben sollte.",
-  "16. Ihr habt mich unterstützt, wenn ich mich alleine gefühlt habe.",
-  "17. Ihr habt mir gezeigt, dass Liebe und Vertrauen alles möglich machen.",
-  "18. Ihr habt mich ermutigt, meine Meinung zu sagen.",
-  "19. Ihr habt mir beigebracht, dass es wichtig ist, auch mal Ruhe zu finden.",
-  "20. Ihr habt mich motiviert, meine Stärken zu nutzen.",
-  "21. Ihr habt mir gezeigt, wie wertvoll Erinnerungen sind.",
-  "22. Ihr habt mich inspiriert, freundlich zu allen zu sein.",
-  "23. Ihr habt mir geholfen, schwierige Situationen zu meistern.",
-  "24. Ihr habt mir beigebracht, dass Lachen die beste Medizin ist.",
-  "25. Ihr habt mich unterstützt, wenn ich etwas Neues lernen wollte.",
-  "26. Ihr habt mir gezeigt, dass Ehrlichkeit immer der richtige Weg ist.",
-  "27. Ihr habt mich motiviert, mein Leben aktiv zu gestalten.",
-  "28. Ihr habt mir geholfen, Geduld und Ausdauer zu entwickeln.",
-  "29. Ihr habt mir beigebracht, dass man aus Rückschlägen stärker wird.",
-  "30. Ihr habt mich inspiriert, selbstbewusst zu sein.",
-  "31. Ihr habt mir gezeigt, dass Familie immer zusammenhält.",
-  "32. Ihr habt mich ermutigt, auf meine Träume zu vertrauen.",
-  "33. Ihr habt mir beigebracht, dass Freundlichkeit ansteckend ist.",
-  "34. Ihr habt mich unterstützt, als ich mutlos war.",
-  "35. Ihr habt mir gezeigt, dass man Herausforderungen mit Zuversicht begegnen kann.",
-  "36. Ihr habt mich motiviert, Neues auszuprobieren.",
-  "37. Ihr habt mir beigebracht, dass kleine Schritte zum Erfolg führen.",
-  "38. Ihr habt mich inspiriert, anderen zu helfen.",
-  "39. Ihr habt mir geholfen, Vertrauen in mich selbst zu entwickeln.",
-  "40. Ihr habt mir gezeigt, dass Dankbarkeit das Leben schöner macht.",
-  "41. Ihr habt mich ermutigt, offen für neue Ideen zu sein.",
-  "42. Ihr habt mir beigebracht, dass man nie aufhören sollte zu lernen.",
-  "43. Ihr habt mich motiviert, positiv zu denken.",
-  "44. Ihr habt mir geholfen, Probleme ruhig anzugehen.",
-  "45. Ihr habt mir gezeigt, wie wertvoll Freundschaft ist.",
-  "46. Ihr habt mich inspiriert, neugierig auf alles zu bleiben.",
-  "47. Ihr habt mir beigebracht, dass Liebe alles stärker macht.",
-  "48. Ihr habt mich unterstützt, als ich an mir selbst zweifelte.",
-  "49. Ihr habt mir gezeigt, dass Zusammenhalt auch in schwierigen Zeiten hilft.",
-  "50. Ihr habt mir beigebracht, dass jeder Tag eine neue Chance ist.",
-  "51. Ihr habt mir beigebracht, jeden Tag mit einem Lächeln zu beginnen.",
-  "52. Ihr habt mir gezeigt, dass es okay ist, mal schwach zu sein.",
-  "53. Ihr habt mich ermutigt, meine Kreativität auszuleben.",
-  "54. Ihr habt mir geholfen, selbstständig Entscheidungen zu treffen.",
-  "55. Ihr habt mir beigebracht, dass Fehler nur Schritte auf dem Weg zum Erfolg sind.",
-  "56. Ihr habt mich unterstützt, wenn ich Angst vor Neuem hatte.",
-  "57. Ihr habt mir beigebracht, auf mein Bauchgefühl zu hören.",
-  "58. Ihr habt mir gezeigt, wie wichtig es ist, freundlich zu sein, auch wenn andere es nicht sind.",
-  "59. Ihr habt mir geholfen, meine Ziele klar zu definieren.",
-  "60. Ihr habt mir gezeigt, dass Geduld oft der Schlüssel zum Erfolg ist.",
-  "61. Ihr habt mir beigebracht, Verantwortung für meine Entscheidungen zu übernehmen.",
-  "62. Ihr habt mich ermutigt, meine Meinung offen zu sagen.",
-  "63. Ihr habt mir gezeigt, wie wichtig es ist, Träume zu verfolgen.",
-  "64. Ihr habt mich unterstützt, als ich mich selbst nicht verstanden habe.",
-  "65. Ihr habt mir beigebracht, dass es okay ist, Hilfe zu fragen.",
-  "66. Ihr habt mir gezeigt, dass Zusammenhalt alles stärker macht.",
-  "67. Ihr habt mich motiviert, neue Dinge auszuprobieren, auch wenn ich unsicher war.",
-  "68. Ihr habt mir beigebracht, meine Gefühle auszudrücken.",
-  "69. Ihr habt mich ermutigt, Verantwortung für meine Fehler zu übernehmen.",
-  "70. Ihr habt mir gezeigt, dass man immer an sich glauben sollte.",
-  "71. Ihr habt mir geholfen, meine Stärken zu erkennen.",
-  "72. Ihr habt mir beigebracht, dass kleine Taten große Wirkung haben können.",
-  "73. Ihr habt mich inspiriert, neugierig auf die Welt zu bleiben.",
-  "74. Ihr habt mir gezeigt, wie wertvoll Ehrlichkeit ist.",
-  "75. Ihr habt mir geholfen, Konflikte fair zu lösen.",
-  "76. Ihr habt mich unterstützt, wenn ich mich überfordert fühlte.",
-  "77. Ihr habt mir beigebracht, dass man aus Rückschlägen lernen kann.",
-  "78. Ihr habt mir gezeigt, dass es wichtig ist, auf andere zu achten.",
-  "79. Ihr habt mich motiviert, meine Träume nicht aufzugeben.",
-  "80. Ihr habt mir beigebracht, wie wichtig Dankbarkeit ist.",
-  "81. Ihr habt mich ermutigt, immer neugierig zu bleiben.",
-  "82. Ihr habt mir gezeigt, dass Liebe und Freundschaft stark verbinden.",
-  "83. Ihr habt mir geholfen, Selbstvertrauen aufzubauen.",
-  "84. Ihr habt mir beigebracht, auf meine Gesundheit zu achten.",
-  "85. Ihr habt mich unterstützt, als ich mutlos war.",
-  "86. Ihr habt mir gezeigt, dass Teamarbeit viel bewirken kann.",
-  "87. Ihr habt mir beigebracht, Konflikte ruhig zu lösen.",
-  "88. Ihr habt mich motiviert, Verantwortung für meine Ziele zu übernehmen.",
-  "89. Ihr habt mir geholfen, meine Zeit sinnvoll einzuteilen.",
-  "90. Ihr habt mir gezeigt, dass es wichtig ist, immer offen für Neues zu sein.",
-  "91. Ihr habt mir beigebracht, dass Geduld und Ausdauer sich lohnen.",
-  "92. Ihr habt mich inspiriert, andere zu respektieren, egal wer sie sind.",
-  "93. Ihr habt mir geholfen, meine Fehler zu akzeptieren.",
-  "94. Ihr habt mir beigebracht, dass Hilfsbereitschaft Freude bringt.",
-  "95. Ihr habt mich motiviert, niemals aufzugeben.",
-  "96. Ihr habt mir gezeigt, wie wertvoll Familie ist.",
-  "97. Ihr habt mir geholfen, Verantwortung für mein eigenes Glück zu übernehmen.",
-  "98. Ihr habt mir beigebracht, dass man immer freundlich bleiben sollte.",
-  "99. Ihr habt mich inspiriert, neugierig auf das Leben zu sein.",
-  "100. Ihr habt mir gezeigt, dass Liebe und Vertrauen alles möglich machen.",
-];
-
-const reasonsContainer = document.getElementById('reasons');
-function renderReasons(){
-  reasonsContainer.innerHTML='';
-  reasonsArray.forEach(r => {
-    const div = document.createElement('div');
-    div.className='reason';
-    div.textContent=r;
-    reasonsContainer.appendChild(div);
+let reasonsArray = [ "1. Ihr habt mir beigebracht, dass Träume keine Grenzen haben.", "2. Ihr habt mich unterstützt, wenn ich mich unsicher gefühlt habe.", "3. Ihr habt mir gezeigt, wie wichtig es ist, für andere da zu sein.", "4. Ihr habt mich motiviert, immer mein Bestes zu geben.", "5. Ihr habt mir geholfen, meine Ängste zu überwinden.", "6. Ihr habt mir beigebracht, dass man sich selbst lieben sollte.", "7. Ihr habt mich ermutigt, auf mein Herz zu hören.", "8. Ihr habt mir gezeigt, dass Zusammenhalt stärker als alles andere ist.", "9. Ihr habt mich unterstützt, als ich mich überfordert fühlte.", "10. Ihr habt mir beigebracht, dass Geduld oft belohnt wird.", "11. Ihr habt mich inspiriert, neugierig auf die Welt zu bleiben.", "12. Ihr habt mir geholfen, Entscheidungen mutig zu treffen.", "13. Ihr habt mir gezeigt, wie schön es ist, Erfolge zu feiern.", "14. Ihr habt mich motiviert, Herausforderungen anzunehmen.", "15. Ihr habt mir beigebracht, dass man immer an sich selbst glauben sollte.", "16. Ihr habt mich unterstützt, wenn ich mich alleine gefühlt habe.", "17. Ihr habt mir gezeigt, dass Liebe und Vertrauen alles möglich machen.", "18. Ihr habt mich ermutigt, meine Meinung zu sagen.", "19. Ihr habt mir beigebracht, dass es wichtig ist, auch mal Ruhe zu finden.", "20. Ihr habt mich motiviert, meine Stärken zu nutzen.", "21. Ihr habt mir gezeigt, wie wertvoll Erinnerungen sind.", "22. Ihr habt mich inspiriert, freundlich zu allen zu sein.", "23. Ihr habt mir geholfen, schwierige Situationen zu meistern.", "24. Ihr habt mir beigebracht, dass Lachen die beste Medizin ist.", "25. Ihr habt mich unterstützt, wenn ich etwas Neues lernen wollte.", "26. Ihr habt mir gezeigt, dass Ehrlichkeit immer der richtige Weg ist.", "27. Ihr habt mich motiviert, mein Leben aktiv zu gestalten.", "28. Ihr habt mir geholfen, Geduld und Ausdauer zu entwickeln.", "29. Ihr habt mir beigebracht, dass man aus Rückschlägen stärker wird.", "30. Ihr habt mich inspiriert, selbstbewusst zu sein.", "31. Ihr habt mir gezeigt, dass Familie immer zusammenhält.", "32. Ihr habt mich ermutigt, auf meine Träume zu vertrauen.", "33. Ihr habt mir beigebracht, dass Freundlichkeit ansteckend ist.", "34. Ihr habt mich unterstützt, als ich mutlos war.", "35. Ihr habt mir gezeigt, dass man Herausforderungen mit Zuversicht begegnen kann.", "36. Ihr habt mich motiviert, Neues auszuprobieren.", "37. Ihr habt mir beigebracht, dass kleine Schritte zum Erfolg führen.", "38. Ihr habt mich inspiriert, anderen zu helfen.", "39. Ihr habt mir geholfen, Vertrauen in mich selbst zu entwickeln.", "40. Ihr habt mir gezeigt, dass Dankbarkeit das Leben schöner macht.", "41. Ihr habt mich ermutigt, offen für neue Ideen zu sein.", "42. Ihr habt mir beigebracht, dass man nie aufhören sollte zu lernen.", "43. Ihr habt mich motiviert, positiv zu denken.", "44. Ihr habt mir geholfen, Probleme ruhig anzugehen.", "45. Ihr habt mir gezeigt, wie wertvoll Freundschaft ist.", "46. Ihr habt mich inspiriert, neugierig auf alles zu bleiben.", "47. Ihr habt mir beigebracht, dass Liebe alles stärker macht.", "48. Ihr habt mich unterstützt, als ich an mir selbst zweifelte.", "49. Ihr habt mir gezeigt, dass Zusammenhalt auch in schwierigen Zeiten hilft.", "50. Ihr habt mir beigebracht, dass jeder Tag eine neue Chance ist.", "51. Ihr habt mir beigebracht, jeden Tag mit einem Lächeln zu beginnen.", "52. Ihr habt mir gezeigt, dass es okay ist, mal schwach zu sein.", "53. Ihr habt mich ermutigt, meine Kreativität auszuleben.", "54. Ihr habt mir geholfen, selbstständig Entscheidungen zu treffen.", "55. Ihr habt mir beigebracht, dass Fehler nur Schritte auf dem Weg zum Erfolg sind.", "56. Ihr habt mich unterstützt, wenn ich Angst vor Neuem hatte.", "57. Ihr habt mir beigebracht, auf mein Bauchgefühl zu hören.", "58. Ihr habt mir gezeigt, wie wichtig es ist, freundlich zu sein, auch wenn andere es nicht sind.", "59. Ihr habt mir geholfen, meine Ziele klar zu definieren.", "60. Ihr habt mir gezeigt, dass Geduld oft der Schlüssel zum Erfolg ist.", "61. Ihr habt mir beigebracht, Verantwortung für meine Entscheidungen zu übernehmen.", "62. Ihr habt mich ermutigt, meine Meinung offen zu sagen.", "63. Ihr habt mir gezeigt, wie wichtig es ist, Träume zu verfolgen.", "64. Ihr habt mich unterstützt, als ich mich selbst nicht verstanden habe.", "65. Ihr habt mir beigebracht, dass es okay ist, Hilfe zu fragen.", "66. Ihr habt mir gezeigt, dass Zusammenhalt alles stärker macht.", "67. Ihr habt mich motiviert, neue Dinge auszuprobieren, auch wenn ich unsicher war.", "68. Ihr habt mir beigebracht, meine Gefühle auszudrücken.", "69. Ihr habt mich ermutigt, Verantwortung für meine Fehler zu übernehmen.", "70. Ihr habt mir gezeigt, dass man immer an sich glauben sollte.", "71. Ihr habt mir geholfen, meine Stärken zu erkennen.", "72. Ihr habt mir beigebracht, dass kleine Taten große Wirkung haben können.", "73. Ihr habt mich inspiriert, neugierig auf die Welt zu bleiben.", "74. Ihr habt mir gezeigt, wie wertvoll Ehrlichkeit ist.", "75. Ihr habt mir geholfen, Konflikte fair zu lösen.", "76. Ihr habt mich unterstützt, wenn ich mich überfordert fühlte.", "77. Ihr habt mir beigebracht, dass man aus Rückschlägen lernen kann.", "78. Ihr habt mir gezeigt, dass es wichtig ist, auf andere zu achten.", "79. Ihr habt mich motiviert, meine Träume nicht aufzugeben.", "80. Ihr habt mir beigebracht, wie wichtig Dankbarkeit ist.", "81. Ihr habt mich ermutigt, immer neugierig zu bleiben.", "82. Ihr habt mir gezeigt, dass Liebe und Freundschaft stark verbinden.", "83. Ihr habt mir geholfen, Selbstvertrauen aufzubauen.", "84. Ihr habt mir beigebracht, auf meine Gesundheit zu achten.", "85. Ihr habt mich unterstützt, als ich mutlos war.", "86. Ihr habt mir gezeigt, dass Teamarbeit viel bewirken kann.", "87. Ihr habt mir beigebracht, Konflikte ruhig zu lösen.", "88. Ihr habt mich motiviert, Verantwortung für meine Ziele zu übernehmen.", "89. Ihr habt mir geholfen, meine Zeit sinnvoll einzuteilen.", "90. Ihr habt mir gezeigt, dass es wichtig ist, immer offen für Neues zu sein.", "91. Ihr habt mir beigebracht, dass Geduld und Ausdauer sich lohnen.", "92. Ihr habt mich inspiriert, andere zu respektieren, egal wer sie sind.", "93. Ihr habt mir geholfen, meine Fehler zu akzeptieren.", "94. Ihr habt mir beigebracht, dass Hilfsbereitschaft Freude bringt.", "95. Ihr habt mich motiviert, niemals aufzugeben.", "96. Ihr habt mir gezeigt, wie wertvoll Familie ist.", "97. Ihr habt mir geholfen, Verantwortung für mein eigenes Glück zu übernehmen.", "98. Ihr habt mir beigebracht, dass man immer freundlich bleiben sollte.", "99. Ihr habt mich inspiriert, neugierig auf das Leben zu sein.", "100. Ihr habt mir gezeigt, dass Liebe und Vertrauen alles möglich machen.", ];
+const container = document.getElementById('reasons');
+function renderReasons() {
+  container.innerHTML='';
+  reasonsArray.forEach(r=>{
+    const d=document.createElement('div');
+    d.className='reason';
+    d.textContent=r;
+    container.appendChild(d);
   });
 }
 renderReasons();
 
-// Eigene Gründe vom Nutzer
-const guestTextarea = document.getElementById('guestReasons');
-guestTextarea.addEventListener('input', () => {
-  const lines = guestTextarea.value.split('\n').filter(l => l.trim() !== '');
-  reasonsArray = lines;
+document.getElementById('guestReasons').addEventListener('input', e=>{
+  reasonsArray = e.target.value.split('\n').filter(l=>l.trim());
   renderReasons();
 });
-
 </script>
+
 </body>
 </html>
