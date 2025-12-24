@@ -1,250 +1,320 @@
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Für die besten Eltern der Welt ❤️</title>
-  <style>
-    :root {
-      --bg: radial-gradient(circle at top, #1e3c5a, #0b1c2d 65%);
-      --glass: rgba(255, 255, 255, 0.18);
-      --border: rgba(255, 255, 255, 0.28);
-      --text: #ffffff;
-      --accent: #ffd369;
-      --warm: #ffecd2;
-    }
-    * { box-sizing: border-box; font-family: "Segoe UI", system-ui, sans-serif; margin: 0; padding: 0; }
-    body { min-height: 100vh; background: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; overflow-x: hidden; position: relative; }
-    body::after { content: ""; position: fixed; inset: 0; background: radial-gradient(circle at center, rgba(255,255,255,0.05), rgba(0,0,0,0.65)); pointer-events: none; z-index: 0; }
-    .app { width: 95%; max-width: 1100px; padding: 2rem; position: relative; z-index: 1; }
-    .glass { background: linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.12)); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border-radius: 24px; border: 1px solid var(--border); box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55); padding: 2.5rem; animation: fadeIn 1.2s ease; }
-    h1 { text-align: center; margin-bottom: 0.5rem; font-size: 2.6rem; background: linear-gradient(90deg, #ffe29f, #ffa99f, #ffd369); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: glow 3s ease-in-out infinite; }
-    .subtitle { text-align: center; opacity: 0.9; margin-bottom: 2rem; color: var(--warm); }
-    .tabs { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .tab-btn { padding: 0.7rem 1.5rem; border-radius: 999px; border: 1px solid var(--border); background: rgba(255,255,255,0.1); color: white; cursor: pointer; transition: all 0.3s ease; }
-    .tab-btn.active, .tab-btn:hover { background: var(--accent); color: #000; }
-    .tab-content { display: none; animation: slideUp 0.6s ease; }
-    .tab-content.active { display: block; }
-    .intro { text-align: center; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1rem; }
-    .reasons { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 2rem; }
-    .reason { background: rgba(255, 255, 255, 0.12); border: 1px solid var(--border); border-radius: 16px; padding: 1rem; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .reason:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); }
-    .reason span { color: var(--accent); font-weight: bold; }
-    footer { text-align: center; margin-top: 2.5rem; opacity: 0.7; font-size: 0.9rem; }
-    .snowflake { position: fixed; top: -10px; color: white; opacity: 0.8; animation: snow linear infinite; pointer-events: none; z-index: 0; }
-    .countdown { text-align:center; font-size:1.2rem; margin-bottom:1rem; color: var(--accent); }
-    .button-group { text-align:center; margin-top:1.5rem; }
-    .text-button { padding:0.7rem 1.5rem; margin:0.3rem; border:none; border-radius:12px; cursor:pointer; background:var(--accent); color:#000; font-weight:bold; transition:all 0.3s ease; }
-    .text-button:hover { background:#ffe29f; }
-    @keyframes snow { to { transform: translateY(110vh); } }
-    @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
-    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes glow { 0%,100% { filter: drop-shadow(0 0 6px rgba(255,211,105,0.4)); } 50% { filter: drop-shadow(0 0 16px rgba(255,211,105,0.8)); } }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🎄 Die besten Eltern der Welt 🎄</title>
+<style>
+:root {
+  --bg1:#020617;
+  --bg2:#0b1c2d;
+  --glass: rgba(255,255,255,0.18);
+  --border: rgba(255,255,255,0.28);
+  --text: #ffffff;
+  --accent: #ffd369;
+  --ok: #3cff8f;
+}
+* { box-sizing:border-box; font-family:"Segoe UI",system-ui,sans-serif; }
+body { margin:0; min-height:100vh; color:var(--text); overflow-y:auto; display:flex; justify-content:center; align-items:flex-start; padding:2rem; background:linear-gradient(-45deg,var(--bg1),var(--bg2),#020617,#0b1c2d); background-size:400% 400%; animation:bgMove 18s ease infinite; }
+@keyframes bgMove { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+body::before { content:""; position:fixed; inset:0; background-image:radial-gradient(rgba(255,255,255,.15) 1px, transparent 1px); background-size:80px 80px; animation:particles 60s linear infinite; pointer-events:none; }
+@keyframes particles { from { transform:translateY(0); } to { transform:translateY(-800px); } }
+.glass { background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,.12)); backdrop-filter:blur(26px); border-radius:26px; border:1px solid var(--border); padding:2.6rem; max-width:1100px; width:95%; animation:enter .9s cubic-bezier(.2,.8,.2,1); position:relative; transition:all .5s ease; margin:auto; }
+@keyframes enter { from{opacity:0; transform:translateY(30px) scale(.96)} to{opacity:1; transform:none} }
+h1 { text-align:center; font-size:2.5rem; background:linear-gradient(90deg,#ffe29f,#ffd369,#ffa99f); -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:glow 3s ease-in-out infinite; }
+@keyframes glow { 0%,100%{filter:drop-shadow(0 0 6px rgba(255,211,105,.4))} 50%{filter:drop-shadow(0 0 18px rgba(255,211,105,.9))} }
+.tabs { display:flex; justify-content:center; gap:1rem; margin:2.2rem 0; flex-wrap:wrap; transition:all .5s ease; }
+.tab-btn { padding:.7rem 1.6rem; border-radius:999px; border:1px solid var(--border); background:rgba(255,255,255,.14); color:white; cursor:pointer; transition:all .35s ease, transform .35s ease; }
+.tab-btn.active { background:var(--accent); color:#000; box-shadow:0 8px 24px rgba(255,211,105,.5); }
+.tab-btn:hover { transform:translateY(-3px) scale(1.04); }
+.tab-content { display:none; opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease; }
+.tab-content.active { display:block; opacity:1; transform:translateY(0); }
+.intro { text-align:center; line-height:1.7; font-size:1.05rem; }
+.reasons { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; margin-top:2rem; }
+.reason { background:rgba(255,255,255,.12); border-radius:18px; padding:1.1rem; transition:all .4s ease; }
+.reason:hover { transform:translateY(-6px) scale(1.03); box-shadow:0 18px 40px rgba(0,0,0,.45); }
+footer { text-align:center; margin-top:2.5rem; opacity:.7; }
+.modal { position:fixed; inset:0; background:rgba(0,0,0,.75); display:flex; justify-content:center; align-items:center; z-index:100; }
+.modal.hidden { display:none; }
+.modal-content { background:var(--glass); backdrop-filter:blur(22px); padding:2.4rem; border-radius:26px; max-width:650px; width:90%; white-space:pre-line; }
+.code-inputs { display:flex; flex-direction:column; gap:1.2rem; align-items:center; margin:1.8rem 0; }
+.code-inputs input { width:100%; max-width:400px; text-align:center; padding:1.1rem; border-radius:18px; border:2px solid var(--border); background:rgba(255,255,255,.18); color:white; font-size:1.35rem; letter-spacing:.28em; text-transform:uppercase; transition:all .35s ease; }
+.code-inputs input:focus { transform:scale(1.05); outline:none; }
+.code-inputs input.correct { border-color:var(--ok); box-shadow:0 0 18px rgba(60,255,143,.75); }
+.blurred { filter:blur(9px); pointer-events:none; }
+textarea { width:100%; max-width:100%; padding:1rem; border-radius:16px; border:2px solid var(--border); background:rgba(255,255,255,.18); color:white; font-size:1rem; resize:vertical; margin-top:1rem; }
+button { padding:.7rem 1.4rem; border-radius:16px; border:none; background:var(--accent); cursor:pointer; transition:transform .3s ease, box-shadow .3s ease; }
+button:hover { transform:translateY(-3px) scale(1.05); box-shadow:0 12px 30px rgba(255,211,105,.6); }
+</style>
 </head>
 <body>
-  <div id="snow-container"></div>
 
-  <div class="app">
-    <div class="glass" id="giftContent">
-      <h1>🎄 Die besten Eltern der Welt 🎄</h1>
-      <div class="subtitle">100 Gründe, warum Mama & Papa einfach einzigartig sind</div>
-      
-      <div id="timerMessage" class="countdown"></div>
+<div id="codeModal" class="modal">
+  <div class="modal-content">
+    <h2>🔐 Vier Codes eingeben</h2>
+    <p class="intro">Bitte gib alle vier Codes ein, die du erhalten hast.</p>
+    <div class="code-inputs">
+      <input id="c1" maxlength="7" />
+      <input id="c2" maxlength="7" />
+      <input id="c3" maxlength="7" />
+      <input id="c4" maxlength="7" />
+    </div>
+    <div style="text-align:center;"><button id="unlockBtn">Freischalten</button></div>
+    <p id="codeError" style="color:#ff9a9a; text-align:center; margin-top:1rem;"></p>
+  </div>
+</div>
 
-      <div class="tabs" id="tabs" style="display:none;">
-        <button class="tab-btn active" data-tab="guest">Für Gäste</button>
-        <button class="tab-btn" data-tab="guestbook">Gästeliste</button>
-        <button class="tab-btn" data-tab="parents">Für Mama & Papa</button>
-      </div>
+<div class="glass blurred" id="app">
+  <h1>🎄 Die besten Eltern der Welt 🎄</h1>
 
-      <div id="guest" class="tab-content active" style="display:none;">
-        <p class="intro">Vor euch stehen die besten Eltern dieser Welt… 💖<br>Wenn du möchtest, kannst du deinen Namen eintragen und Teil dieses Geschenks werden.</p>
-        <div style="text-align:center; margin-top:1.5rem;">
-          <input id="guestName" placeholder="Dein Name" style="padding:0.6rem 1rem;border-radius:12px;border:none;max-width:240px;" />
-          <button id="addGuest" class="tab-btn" style="margin-left:0.5rem;">Hinzufügen</button>
-        </div>
-        <p style="text-align:center;opacity:0.7;margin-top:1rem;">Dein Name erscheint in der Gästeliste ❤️</p>
-        <div style="text-align:center;margin-top:1rem;">
-          <button id="notifyBtn" class="text-button">Benachrichtige mich um 20:00 Uhr</button>
-        </div>
-      </div>
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="guest">Für Gäste</button>
+    <button class="tab-btn" data-tab="parents">Für Mama & Papa</button>
+    <button class="tab-btn" data-tab="noah">Von Noah</button>
+    <button class="tab-btn" data-tab="downloads">Downloads</button>
+  </div>
 
-      <div id="guestbook" class="tab-content" style="display:none;">
-        <p class="intro">🎁 Menschen, die dieses Geschenk besucht haben:</p>
-        <ul id="guestList" style="margin-top:1.5rem; list-style:none; padding:0; text-align:center;"></ul>
-      </div>
+  <div id="guest" class="tab-content active">
+    <p class="intro">Vor euch stehen die besten Eltern dieser Welt. Dieses Geschenk ist ein Einblick in all die Liebe, Dankbarkeit und Erinnerungen, die sie hinterlassen haben. ❤️</p>
+    <textarea id="guestReasons" placeholder="Hier kannst du deine eigenen Gründe eintragen..."></textarea>
+  </div>
 
-      <div id="parents" class="tab-content" style="display:none;">
-        <p class="intro">Liebe Mama, lieber Papa,<br>diese Gründe kommen von Herzen. Danke für alles. ❤️</p>
-        <div id="reasons" class="reasons"></div>
-        <div class="button-group">
-          <button class="text-button" onclick="alert('Mama, du bist die beste! ❤️')">Text für Mama</button>
-          <button class="text-button" onclick="alert('Papa, du bist der Beste! ❤️')">Text für Papa</button>
-        </div>
-      </div>
-
-      <footer>Mit ❤️ gemacht von Jayden · Weihnachten 2025</footer>
+  <div id="parents" class="tab-content">
+    <div class="reasons" id="reasons"></div>
+    <div style="text-align:center; margin-top:2rem;">
     </div>
   </div>
 
-  <script>
-    // -------------------
-    // Timer für 20:00 Uhr
-    // -------------------
-    const giftContent = document.getElementById('giftContent');
-    const tabs = document.getElementById('tabs');
-    const guestTab = document.getElementById('guest');
-    const guestbookTab = document.getElementById('guestbook');
-    const parentsTab = document.getElementById('parents');
-    const timerMessage = document.getElementById('timerMessage');
+  <div id="noah" class="tab-content blurred" data-unlocked="false"><p class="intro">        liebe mama und papa 
+        ich liebe euch sher und hoffe wir bleibe lange eine schöne familie
+        die zeit mit euch ist und wird immer die beste zeit sein 
+        auch wenn wir nicht immmer die beten und nettesten sind ist es immer eine tolle zeit mit euch
+        ich freue mich das wir so eine schöne familie geworden sind und uns alle lieb haben
+        dir mama will ich saen danke für das leckere essen das du immer für uns kochst das machst du immer mit liebe 
+        und es schmeckt immer super gut und du kümmerst dich auch immer um uns danke dafür
+        jetzt kommmen wir zum Papa
+        du papa bist net hast guten geschmak un machst immer richtig leckeres esse und bist der beste papa der Welt
+        ihr beide seid die besten eltern der welt ich hab euch lieb 
+        euer Noah
 
-    function checkTime(){
-      const now = new Date();
-      let openTime = new Date();
-      openTime.setHours(20,0,0,0);
-      if(now >= openTime){
-        timerMessage.style.display = 'none';
-        tabs.style.display = 'flex';
-        guestTab.style.display = 'block';
-        guestbookTab.style.display = 'none';
-        parentsTab.style.display = 'none';
-        return true;
-      } else {
-        const diff = openTime - now;
-        const hours = Math.floor(diff/1000/60/60);
-        const minutes = Math.floor(diff/1000/60) % 60;
-        const seconds = Math.floor(diff/1000) % 60;
-        timerMessage.textContent = `🎁 Das Geschenk kann erst um 20:00 Uhr geöffnet werden! Noch ${hours}h ${minutes}m ${seconds}s`;
-        return false;
-      }
-    }
+</p></div>
 
-    checkTime();
-    const timerInterval = setInterval(() => {
-      if(checkTime()){
-        clearInterval(timerInterval);
-      }
-    },1000);
+  <div id="downloads" class="tab-content blurred">
+    <div style="text-align:center; margin-top:2rem;">
+      <button onclick="downloadFile('html')">HTML herunterladen</button>
+      <button onclick="downloadFile('pdf')">PDF herunterladen</button>
+      <button onclick="downloadFile('zip')">Alle Dateien herunterladen</button>
+    </div>
+  </div>
 
-    // Notification
-    document.getElementById('notifyBtn').addEventListener('click', ()=>{
-      if("Notification" in window){
-        Notification.requestPermission().then(permission=>{
-          if(permission==="granted"){
-            const now = new Date();
-            let openTime = new Date();
-            openTime.setHours(20,0,0,0);
-            const delay = openTime - now;
-            if(delay>0){
-              setTimeout(()=> new Notification("🎁 Das Geschenk kann jetzt geöffnet werden!"), delay);
-              alert("Du wirst um 20:00 Uhr benachrichtigt!");
-            }
-          }
-        });
-      } else {
-        alert("Dein Browser unterstützt keine Benachrichtigungen!");
-      }
-    });
+  <footer>Weihnachten 2025 · Mit ❤️ von Jayden</footer>
+</div>
 
-    // -------------------
-    // Gästeliste als JSON + LocalStorage
-    // -------------------
-    let guestData = { guests: [] };
-    if(localStorage.getItem('guestData')){
-      guestData = JSON.parse(localStorage.getItem('guestData'));
-    }
+<div id="textModal" class="modal hidden">
+  <div class="modal-content">
+    <h2 id="modalTitle"></h2>
+    <div id="modalText"></div>
+    <div style="text-align:center; margin-top:1.2rem;"><button onclick="closeText()">Schließen</button></div>
+  </div>
+</div>
 
-    const guestList = document.getElementById('guestList');
-    function renderGuests(){
-      guestList.innerHTML = '';
-      guestData.guests.forEach((name)=>{
-        const li = document.createElement('li');
-        li.textContent = '❄️ ' + name;
-        li.style.margin = '0.4rem 0';
-        li.style.opacity = '0';
-        li.style.transition = 'opacity 0.6s ease';
-        guestList.appendChild(li);
-        requestAnimationFrame(()=>li.style.opacity='1');
-      });
-    }
-    renderGuests();
+<script>
+const VALID_CODES = ['K7M-42Q','X3A-N27','WQ6-91E','R9L-8FD'];
+const inputs = ['c1','c2','c3','c4'].map(id => document.getElementById(id));
+const app = document.getElementById('app');
+const codeModal = document.getElementById('codeModal');
+const codeError = document.getElementById('codeError');
+const unlockBtn = document.getElementById('unlockBtn');
+const noahTab = document.getElementById('noah');
+const NOAH_CODE = '31L13D';
 
-    const guestInput = document.getElementById('guestName');
-    document.getElementById('addGuest').addEventListener('click',()=>{
-      const name = guestInput.value.trim();
-      if(!name) return;
-      guestData.guests.push(name);
-      localStorage.setItem('guestData', JSON.stringify(guestData));
-      renderGuests();
-      guestInput.value='';
-      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-      document.querySelector('[data-tab="guestbook"]').classList.add('active');
-      guestbookTab.classList.add('active');
-    });
+function formatInput(input){
+  let raw = input.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6);
+  const parts = raw.match(/.{1,3}/g);
+  input.value = parts ? parts.join('-') : '';
+}
+inputs.forEach(input => input.addEventListener('input', () => { formatInput(input); input.classList.remove('correct'); }));
 
-    // -------------------
-    // Tabs
-    // -------------------
-    document.querySelectorAll('.tab-btn[data-tab]').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById(btn.dataset.tab).classList.add('active');
-      });
-    });
+unlockBtn.addEventListener('click', () => {
+  const enteredCodes = inputs.map(i => i.value);
+  let allMatched = VALID_CODES.every(code => enteredCodes.includes(code));
+  if(allMatched){
+    inputs.forEach(i => i.classList.add('correct'));
+    codeModal.classList.add('hidden');
+    app.classList.remove('blurred');
+    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('blurred'));
+    codeError.textContent='';
+  } else {
+    codeError.textContent='❌ Mindestens ein Code ist falsch.';
+  }
+});
 
-    // -------------------
-    // Snowflakes
-    // -------------------
-    const snowContainer = document.getElementById('snow-container');
-    for(let i=0;i<40;i++){
-      const snow=document.createElement('div');
-      snow.className='snowflake';
-      snow.textContent='❄';
-      snow.style.left=Math.random()*100+'vw';
-      snow.style.fontSize=12+Math.random()*18+'px';
-      snow.style.animationDuration=6+Math.random()*6+'s';
-      snowContainer.appendChild(snow);
-    }
+// Tabs + Noah-Code Schutz
+const tabButtons = document.querySelectorAll('.tab-btn');
+tabButtons.forEach(btn => btn.addEventListener('click', () => {
+  const target = btn.dataset.tab;
+  if(target==='noah' && noahTab.dataset.unlocked==='false'){ showNoahModal(); return; }
+  tabButtons.forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(target).classList.add('active');
+}));
 
-    // -------------------
-    // 100 Gründe
-    // -------------------
-    const reasons=[
-      "Ihr liebt mich bedingungslos",
-      "Ihr wart immer für mich da",
-      "Ihr habt mir Werte beigebracht",
-      "Ihr habt mir Sicherheit gegeben",
-      "Ihr habt Geduld mit mir",
-      "Ihr habt an mich geglaubt",
-      "Ihr habt mich getröstet",
-      "Ihr habt mit mir gelacht",
-      "Ihr habt mir Mut gemacht",
-      "Ihr habt Opfer für mich gebracht",
-      "Ihr habt mir zugehört",
-      "Ihr habt mir Halt gegeben",
-      "Ihr habt mir Freiraum gelassen",
-      "Ihr habt mir Grenzen gezeigt",
-      "Ihr habt mich unterstützt",
-      "Ihr habt mich beschützt",
-      "Ihr habt mir Liebe vorgelebt",
-      "Ihr habt mich ernst genommen",
-      "Ihr habt mir Vertrauen geschenkt",
-      "Ihr habt mich akzeptiert wie ich bin"
-      // ...weitere 80 Gründe ergänzen
-    ];
+function showNoahModal(){
+  if(document.getElementById('noahUnlockPopup')) return;
+  const popup = document.createElement('div');
+  popup.id='noahUnlockPopup';
+  popup.className='modal';
+  popup.innerHTML=`<div class="modal-content">
+    <h2>🔐 Code für Noah</h2>
+    <p class="intro">Bitte gib den Code ein, um diesen Tab zu entsperren.</p>
+    <input id="noahInput" maxlength="7" style="width:200px; text-align:center; padding:0.8rem; border-radius:12px; border:2px solid var(--border); text-transform:uppercase; font-size:1.2rem; display:block; margin:1rem auto;" />
+    <div style="text-align:center; margin-top:1.5rem;"><button id="noahUnlockBtn">Entsperren</button></div>
+    <p id="noahError" style="color:#ff9a9a; text-align:center; margin-top:1rem;"></p>
+  </div>`;
+  document.body.appendChild(popup);
+  document.getElementById('noahUnlockBtn').addEventListener('click', ()=>{
+    const val = document.getElementById('noahInput').value.toUpperCase();
+    if(val === NOAH_CODE){
+      noahTab.dataset.unlocked='true';
+      noahTab.classList.remove('blurred');
+      document.getElementById('downloads').classList.remove('blurred');
+      popup.remove();
+      document.querySelector('.tab-btn[data-tab="noah"]').click();
+    } else { document.getElementById('noahError').textContent='❌ Falscher Code!'; }
+  });
+}
 
-    const reasonsContainer=document.getElementById('reasons');
-    reasons.forEach((text,i)=>{
-      const div=document.createElement('div');
-      div.className='reason';
-      div.innerHTML=`<span>${i+1}.</span> ${text}.`;
-      reasonsContainer.appendChild(div);
-    });
+// Gründe einfügen – eigene 100 Gründe
+let reasonsArray = [
+  // Hier deine 100 individuellen Gründe eintragen, z.B.
+  "1. Ihr habt mir beigebracht, dass Träume keine Grenzen haben.",
+  "2. Ihr habt mich unterstützt, wenn ich mich unsicher gefühlt habe.",
+  "3. Ihr habt mir gezeigt, wie wichtig es ist, für andere da zu sein.",
+  "4. Ihr habt mich motiviert, immer mein Bestes zu geben.",
+  "5. Ihr habt mir geholfen, meine Ängste zu überwinden.",
+  "6. Ihr habt mir beigebracht, dass man sich selbst lieben sollte.",
+  "7. Ihr habt mich ermutigt, auf mein Herz zu hören.",
+  "8. Ihr habt mir gezeigt, dass Zusammenhalt stärker als alles andere ist.",
+  "9. Ihr habt mich unterstützt, als ich mich überfordert fühlte.",
+  "10. Ihr habt mir beigebracht, dass Geduld oft belohnt wird.",
+  "11. Ihr habt mich inspiriert, neugierig auf die Welt zu bleiben.",
+  "12. Ihr habt mir geholfen, Entscheidungen mutig zu treffen.",
+  "13. Ihr habt mir gezeigt, wie schön es ist, Erfolge zu feiern.",
+  "14. Ihr habt mich motiviert, Herausforderungen anzunehmen.",
+  "15. Ihr habt mir beigebracht, dass man immer an sich selbst glauben sollte.",
+  "16. Ihr habt mich unterstützt, wenn ich mich alleine gefühlt habe.",
+  "17. Ihr habt mir gezeigt, dass Liebe und Vertrauen alles möglich machen.",
+  "18. Ihr habt mich ermutigt, meine Meinung zu sagen.",
+  "19. Ihr habt mir beigebracht, dass es wichtig ist, auch mal Ruhe zu finden.",
+  "20. Ihr habt mich motiviert, meine Stärken zu nutzen.",
+  "21. Ihr habt mir gezeigt, wie wertvoll Erinnerungen sind.",
+  "22. Ihr habt mich inspiriert, freundlich zu allen zu sein.",
+  "23. Ihr habt mir geholfen, schwierige Situationen zu meistern.",
+  "24. Ihr habt mir beigebracht, dass Lachen die beste Medizin ist.",
+  "25. Ihr habt mich unterstützt, wenn ich etwas Neues lernen wollte.",
+  "26. Ihr habt mir gezeigt, dass Ehrlichkeit immer der richtige Weg ist.",
+  "27. Ihr habt mich motiviert, mein Leben aktiv zu gestalten.",
+  "28. Ihr habt mir geholfen, Geduld und Ausdauer zu entwickeln.",
+  "29. Ihr habt mir beigebracht, dass man aus Rückschlägen stärker wird.",
+  "30. Ihr habt mich inspiriert, selbstbewusst zu sein.",
+  "31. Ihr habt mir gezeigt, dass Familie immer zusammenhält.",
+  "32. Ihr habt mich ermutigt, auf meine Träume zu vertrauen.",
+  "33. Ihr habt mir beigebracht, dass Freundlichkeit ansteckend ist.",
+  "34. Ihr habt mich unterstützt, als ich mutlos war.",
+  "35. Ihr habt mir gezeigt, dass man Herausforderungen mit Zuversicht begegnen kann.",
+  "36. Ihr habt mich motiviert, Neues auszuprobieren.",
+  "37. Ihr habt mir beigebracht, dass kleine Schritte zum Erfolg führen.",
+  "38. Ihr habt mich inspiriert, anderen zu helfen.",
+  "39. Ihr habt mir geholfen, Vertrauen in mich selbst zu entwickeln.",
+  "40. Ihr habt mir gezeigt, dass Dankbarkeit das Leben schöner macht.",
+  "41. Ihr habt mich ermutigt, offen für neue Ideen zu sein.",
+  "42. Ihr habt mir beigebracht, dass man nie aufhören sollte zu lernen.",
+  "43. Ihr habt mich motiviert, positiv zu denken.",
+  "44. Ihr habt mir geholfen, Probleme ruhig anzugehen.",
+  "45. Ihr habt mir gezeigt, wie wertvoll Freundschaft ist.",
+  "46. Ihr habt mich inspiriert, neugierig auf alles zu bleiben.",
+  "47. Ihr habt mir beigebracht, dass Liebe alles stärker macht.",
+  "48. Ihr habt mich unterstützt, als ich an mir selbst zweifelte.",
+  "49. Ihr habt mir gezeigt, dass Zusammenhalt auch in schwierigen Zeiten hilft.",
+  "50. Ihr habt mir beigebracht, dass jeder Tag eine neue Chance ist.",
+  "51. Ihr habt mir beigebracht, jeden Tag mit einem Lächeln zu beginnen.",
+  "52. Ihr habt mir gezeigt, dass es okay ist, mal schwach zu sein.",
+  "53. Ihr habt mich ermutigt, meine Kreativität auszuleben.",
+  "54. Ihr habt mir geholfen, selbstständig Entscheidungen zu treffen.",
+  "55. Ihr habt mir beigebracht, dass Fehler nur Schritte auf dem Weg zum Erfolg sind.",
+  "56. Ihr habt mich unterstützt, wenn ich Angst vor Neuem hatte.",
+  "57. Ihr habt mir beigebracht, auf mein Bauchgefühl zu hören.",
+  "58. Ihr habt mir gezeigt, wie wichtig es ist, freundlich zu sein, auch wenn andere es nicht sind.",
+  "59. Ihr habt mir geholfen, meine Ziele klar zu definieren.",
+  "60. Ihr habt mir gezeigt, dass Geduld oft der Schlüssel zum Erfolg ist.",
+  "61. Ihr habt mir beigebracht, Verantwortung für meine Entscheidungen zu übernehmen.",
+  "62. Ihr habt mich ermutigt, meine Meinung offen zu sagen.",
+  "63. Ihr habt mir gezeigt, wie wichtig es ist, Träume zu verfolgen.",
+  "64. Ihr habt mich unterstützt, als ich mich selbst nicht verstanden habe.",
+  "65. Ihr habt mir beigebracht, dass es okay ist, Hilfe zu fragen.",
+  "66. Ihr habt mir gezeigt, dass Zusammenhalt alles stärker macht.",
+  "67. Ihr habt mich motiviert, neue Dinge auszuprobieren, auch wenn ich unsicher war.",
+  "68. Ihr habt mir beigebracht, meine Gefühle auszudrücken.",
+  "69. Ihr habt mich ermutigt, Verantwortung für meine Fehler zu übernehmen.",
+  "70. Ihr habt mir gezeigt, dass man immer an sich glauben sollte.",
+  "71. Ihr habt mir geholfen, meine Stärken zu erkennen.",
+  "72. Ihr habt mir beigebracht, dass kleine Taten große Wirkung haben können.",
+  "73. Ihr habt mich inspiriert, neugierig auf die Welt zu bleiben.",
+  "74. Ihr habt mir gezeigt, wie wertvoll Ehrlichkeit ist.",
+  "75. Ihr habt mir geholfen, Konflikte fair zu lösen.",
+  "76. Ihr habt mich unterstützt, wenn ich mich überfordert fühlte.",
+  "77. Ihr habt mir beigebracht, dass man aus Rückschlägen lernen kann.",
+  "78. Ihr habt mir gezeigt, dass es wichtig ist, auf andere zu achten.",
+  "79. Ihr habt mich motiviert, meine Träume nicht aufzugeben.",
+  "80. Ihr habt mir beigebracht, wie wichtig Dankbarkeit ist.",
+  "81. Ihr habt mich ermutigt, immer neugierig zu bleiben.",
+  "82. Ihr habt mir gezeigt, dass Liebe und Freundschaft stark verbinden.",
+  "83. Ihr habt mir geholfen, Selbstvertrauen aufzubauen.",
+  "84. Ihr habt mir beigebracht, auf meine Gesundheit zu achten.",
+  "85. Ihr habt mich unterstützt, als ich mutlos war.",
+  "86. Ihr habt mir gezeigt, dass Teamarbeit viel bewirken kann.",
+  "87. Ihr habt mir beigebracht, Konflikte ruhig zu lösen.",
+  "88. Ihr habt mich motiviert, Verantwortung für meine Ziele zu übernehmen.",
+  "89. Ihr habt mir geholfen, meine Zeit sinnvoll einzuteilen.",
+  "90. Ihr habt mir gezeigt, dass es wichtig ist, immer offen für Neues zu sein.",
+  "91. Ihr habt mir beigebracht, dass Geduld und Ausdauer sich lohnen.",
+  "92. Ihr habt mich inspiriert, andere zu respektieren, egal wer sie sind.",
+  "93. Ihr habt mir geholfen, meine Fehler zu akzeptieren.",
+  "94. Ihr habt mir beigebracht, dass Hilfsbereitschaft Freude bringt.",
+  "95. Ihr habt mich motiviert, niemals aufzugeben.",
+  "96. Ihr habt mir gezeigt, wie wertvoll Familie ist.",
+  "97. Ihr habt mir geholfen, Verantwortung für mein eigenes Glück zu übernehmen.",
+  "98. Ihr habt mir beigebracht, dass man immer freundlich bleiben sollte.",
+  "99. Ihr habt mich inspiriert, neugierig auf das Leben zu sein.",
+  "100. Ihr habt mir gezeigt, dass Liebe und Vertrauen alles möglich machen.",
+];
 
-  </script>
+const reasonsContainer = document.getElementById('reasons');
+function renderReasons(){
+  reasonsContainer.innerHTML='';
+  reasonsArray.forEach(r => {
+    const div = document.createElement('div');
+    div.className='reason';
+    div.textContent=r;
+    reasonsContainer.appendChild(div);
+  });
+}
+renderReasons();
+
+// Eigene Gründe vom Nutzer
+const guestTextarea = document.getElementById('guestReasons');
+guestTextarea.addEventListener('input', () => {
+  const lines = guestTextarea.value.split('\n').filter(l => l.trim() !== '');
+  reasonsArray = lines;
+  renderReasons();
+});
+
+</script>
 </body>
 </html>
